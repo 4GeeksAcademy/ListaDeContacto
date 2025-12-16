@@ -6,38 +6,24 @@ export const Demo = () => {
   // Access the global state and dispatch function using the useGlobalReducer hook.
   const { store, dispatch } = useGlobalReducer()
 
-  return (
-    <div className="container">
-      <ul className="list-group">
-        {/* Map over the 'todos' array from the store and render each item as a list element */}
-        {store && store.todos?.map((item) => {
-          return (
-            <li
-              key={item.id}  // React key for list items.
-              className="list-group-item d-flex justify-content-between"
-              style={{ background: item.background }}> 
-              
-              {/* Link to the detail page of this todo. */}
-              <Link to={"/single/" + item.id}>Link to: {item.title} </Link>
-              
-              <p>Open file ./store.js to see the global store that contains and updates the list of colors</p>
-              
-              <button className="btn btn-success" 
-                onClick={() => dispatch({
-                  type: "add_task", 
-                  payload: { id: item.id, color: '#ffa500' }
-                })}>
-                Change Color
-              </button>
-            </li>
-          );
-        })}
-      </ul>
-      <br />
+  const cambiarColor = (id) => {
+    dispatch({
+      type: 'add_task',
+      payload: { id, color: '#ffa500' }
 
-      <Link to="/">
-        <button className="btn btn-primary">Back home</button>
-      </Link>
-    </div>
+    });
+  };
+
+  return (
+    <ul>
+      {store.todos.map(todo => (
+        <li key={todo.id} style={{ background: todo.background }}>
+          {todo.title}
+          <button onClick={() => cambiarColor(todo.id)}>
+            Cambiar color
+          </button>
+        </li>
+      ))}
+    </ul>
   );
 };
