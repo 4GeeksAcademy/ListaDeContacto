@@ -1,8 +1,26 @@
 
 
-export const Card = ({ title, subtitle }) => (
-    <div className='card'>
-        <h5>{title}</h5>
-        <h6>{subtitle}</h6>
-    </div>
-);
+export const Card = ({name, address, phone, email}) => {
+
+    return (
+        <div className="card mb-3">
+            <div className="row g-0">
+                <div className="col-md-3 d-flex justify-content-center align-item-center">
+                    <div className="col-md-4 mt-4">
+                        <img src="https://img.freepik.com/free-photo/portrait-white-man-isolated_53876-40306.jpg?semt=ais_hybrid&w=740&q=80" 
+                        className="img-fluid rounded-circle" />
+                    </div>
+                </div>
+
+                <div className="col-md-7 text-start">
+                    <div className="card-body">
+                        <h5 className="card-title">{name}</h5>
+                        <p className="card-text">{address}</p>
+                        <p className="card-text">{phone}</p>
+                        <p className="card-text">{email}</p>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
