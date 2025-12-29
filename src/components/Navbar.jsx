@@ -6,7 +6,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-light">
 			<div className="container d-flex justify-content-end">				
 				<div className="ml-auto">
-					<Link to="/demo">
+					<Link to="/contact">
 						<button className="btn btn-success">Add New contact</button>
 					</Link>
 				</div>

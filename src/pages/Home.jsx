@@ -7,7 +7,6 @@ export const Home = () => {
 	const [contactos, setContactos] = useState([])
 
 
-
 	const verContactosAgenda = async () => {
 		const response = await fetch('https://playground.4geeks.com/contact/agendas/Sergio/contacts')
 		if (response.status === 404) {
