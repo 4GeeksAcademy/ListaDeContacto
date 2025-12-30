@@ -1,6 +1,6 @@
 
 
-export const Card = ({name, address, phone, email}) => {
+export const Card = ({name, address, phone, email, id}) => {
 
     return (
         <div className="card mb-3">
@@ -17,7 +17,8 @@ export const Card = ({name, address, phone, email}) => {
                         <h5 className="card-title">{name}</h5>
                         <p className="card-text">{address}</p>
                         <p className="card-text">{phone}</p>
-                        <p className="card-text">{email}</p>                        
+                        <p className="card-text">{email}</p>
+                        <p className="card-text">{id}</p>                         
                     </div>
                 </div>
             </div>

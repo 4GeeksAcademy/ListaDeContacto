@@ -6,15 +6,15 @@ import {
     Route,
 } from "react-router-dom";
 import { Layout } from "./pages/Layout";
-import { Home } from "./pages/Home";
 import { ContactForm } from "./pages/ContactForm";
+import { ContactList } from "./pages/ContactList";
 
 
 export const router = createBrowserRouter(
     createRoutesFromElements(      
       <Route path="/" element={<Layout />} errorElement={<h1>Not found!</h1>} >        
-        <Route path= "/" element={<Home />} />
-        <Route path="/" element={<ContactForm />} />
+        <Route path= "/contact-list" element={<ContactList />} />
+        <Route path="/contact-form" element={<ContactForm />} />
       </Route>
     )
 );
