@@ -1,9 +1,16 @@
+import { useNavigate } from "react-router-dom";
 
-
+// En este Card vamos a hacer que podemos modificarla para eso tenemos que traer el useNavigate y trabajar con el hasta el Contact-form
 export const Card = ({name, address, phone, email, id}) => {
 
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/contact-form', { state: { contact: { name, address, phone, email, id } } });
+    };
+
     return (
-        <div className="card mb-3">
+        <div className="card mb-3" onClick={handleClick} style={{ cursor: 'pointer' }} >
             <div className="row g-0">
                 <div className="col-md-3 d-flex justify-content-center align-item-center">
                     <div className="col-md-4 mt-4">
