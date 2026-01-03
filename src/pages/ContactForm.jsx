@@ -42,7 +42,7 @@ export const ContactForm = () => {
     };
 
     // Está parte es SUMAMENTE IMPORTANTE ya que le estamos diciendo a la aplicación que en caso que no haya agenda la cree para poder continuar
-    const response = await fetch(url, opciones);
+    let response = await fetch(url, opciones);
 
     if (response.status === 404 && !contactToEdit) {
       const agendaCreada = await createAgenda();
