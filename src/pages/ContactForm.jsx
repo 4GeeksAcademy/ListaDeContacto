@@ -55,10 +55,10 @@ export const ContactForm = () => {
     if (response.ok) {
 
       Swal.fire({
-        title: '¡Éxito!',
-        text: contactToEdit ? 'Contacto editado correctamente' : 'Contacto creado correctamente',
+        title: '¡Success!',
+        text: contactToEdit ? 'The contact has been updated successfully' : 'The contact has been created successfully',
         icon: 'success',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Accept'
       }).then(() => {
         navigate('/contact-list');
       });
@@ -67,7 +67,7 @@ export const ContactForm = () => {
         title: 'Error',
         text: 'No se pudo guardar el contacto. Intenta nuevamente.',
         icon: 'error',
-        confirmButtonText: 'Aceptar'
+        confirmButtonText: 'Accept'
       });
     }
   };
@@ -79,35 +79,73 @@ export const ContactForm = () => {
 
 
   return (
-    <form onSubmit={handleSubmit} className='d-flex flex-column align-items-center'>
-      <h2>{contactToEdit ? 'Editar contacto' : 'Nuevo contacto'}</h2>
-      <label>Name</label>
-      <input id='name' value={name} onChange={(event) => {
-        setName(event.target.value)
-      }}
-        type='text' required></input>
+    <div className='container mt-4'>
+      <div className='row justify-content-center'>
+        <div className='col-12'>
+          <div className='card shadow'>
+            <div className='card-body'>
+              <h3 className='card-title text-center mb-3'>
+                {contactToEdit ? 'Edit contact' : 'Add contact'}</h3>
 
-      <label>Email</label>
-      <input id='email' value={email} onChange={(event) => {
-        setEmail(event.target.value)
-      }}
-        type='email' required></input>
+              <form onSubmit={handleSubmit}>
 
-      <label>Phone</label>
-      <input id='phone' value={phone} onChange={(event) => {
-        setPhone(event.target.value)
-      }}
-        type='text' required></input>
+                <div className='mb-3'>
+                  <label className="form-label">Full Name</label>
+                  <input
+                    className='form-control'
+                    type='text'
+                    placeholder='Full name'
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                  />
+                </div>
 
-      <label>Address</label>
-      <input id='address' value={address} onChange={(event) => {
-        setAddress(event.target.value)
-      }}
-        type='text' required></input>
+                <div className='mb-3'>
+                  <label className='form-label'>Email</label>
+                  <input
+                    className='form-control'
+                    type='email'
+                    placeholder='Enter email'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
 
-      <button className='btn btn-success mt-3' type='submit'>
-        Save Contact
-      </button>
-    </form>
+                <div className='mb-3'>
+                  <label className='form-label'>Phone</label>
+                  <input
+                    className='form-control'
+                    type='text'
+                    placeholder='Enter phone'
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className='mb-4'>
+                  <label className="form-label">Address</label>
+                  <input
+                    className='form-control'
+                    type='text'
+                    placeholder='Enter address'
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className='d-flex flex-column align-items-center'>
+                  <button className='btn btn-outline-info mt-3 ' type='submit'>
+                    Save Contact
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

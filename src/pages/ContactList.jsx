@@ -1,11 +1,10 @@
-import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Card } from "../components/Card.jsx";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 export const ContactList = () => {
-  const [contactos, setContactos] = useState([])
+  const [contacts, setContacts] = useState([])
 
   const navigate = useNavigate();
 
@@ -21,18 +20,18 @@ export const ContactList = () => {
 
     } else if (response.status === 200) {
       const data = await response.json()
-      setContactos(data.contacts)
+      setContacts(data.contacts)
     }
   }
 
   const eliminarContacto = async (id) => {
     const result = await Swal.fire({
-      title: '¿Estás seguro?',
-      text: "No podrás revertir esta acción",
+      title: 'Are you sure?',
+      text: 'This action cannot be undone',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'Cancel'
     });
 
     if (result.isConfirmed) {
@@ -41,10 +40,10 @@ export const ContactList = () => {
       });
 
       if (response.ok) {
-        setContactos(contactos.filter(c => c.id !== id));
-        Swal.fire('¡Eliminado!', 'El contacto ha sido eliminado', 'success');
+        setContacts(contacts.filter(c => c.id !== id));
+        Swal.fire('Deleted!', 'The contact has been deleted', 'success');
       } else {
-        Swal.fire('Error', 'No se pudo eliminar el contacto', 'error');
+        Swal.fire('Error', 'The contact could not be deleted', 'error');
       }
     }
   };
@@ -54,18 +53,35 @@ export const ContactList = () => {
   }, [])
 
   return (
-    <>
-      <div className='d-flex justify-content-center my-3'>
-        <button
-          onClick={() => navigate('/contact-form')}
-          type='button'
-          className='btn btn-outline-warning'>
-          Agregar Contacto
-        </button>
-      </div>
 
-      {contactos.map((contacto) => {
-        return (
+    <div className='container mt-4'>
+      {contacts.length > 0 && (
+        <div className='d-flex justify-content-start mb-3'>
+          <button
+            onClick={() => navigate('/contact-form')}
+            type='button'
+            className='btn btn-outline-info'>
+            Add Contact
+          </button>
+        </div>
+      )}
+
+      {contacts.length === 0 ? (
+        <div className="card text-center shadow-sm">
+          <div className="card-body">
+            <h4 className="mb-3">No contacts yet</h4>
+            <p className="text-muted mb-4">
+              Start by adding your first contact.
+            </p>
+            <button
+              className="btn btn-outline-info"
+              onClick={() => navigate("/contact-form")}>
+              Create your first contact
+            </button>
+          </div>
+        </div>
+      ) : (
+        contacts.map((contacto) => (
           <Card
             key={contacto.id}
             name={contacto.name}
@@ -75,8 +91,7 @@ export const ContactList = () => {
             id={contacto.id}
             onDelete={eliminarContacto}
           />
-        );
-      })}
-    </>
-  );
-}; 
+        ))
+      )}
+    </div>  )
+};
